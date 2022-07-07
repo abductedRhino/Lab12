@@ -29,5 +29,8 @@ public class Item
     public String getDescription() {
         return description + " (" + weight + " kg)";
     }
+    public int getWeight() {
+        return weight;
+    }
 }
 

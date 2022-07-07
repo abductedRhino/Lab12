@@ -45,4 +45,20 @@ public class Player {
     public boolean canGoBack() {
         return !previousRooms.empty();
     }
+
+    public void addItem(Item thing) {
+        rucksack.add(thing);
+    }
+
+    private int totalWeight() {
+        int total = 0;
+        for (Item item :
+                rucksack) {
+            total += item.getWeight();
+        }
+        return total;
+    }
+    public boolean canCarry(Item item) {
+        return item.getWeight() <= (weightLimit - totalWeight());
+    }
 }

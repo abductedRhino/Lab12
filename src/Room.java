@@ -88,10 +88,17 @@ public class Room
         }
 
     }
+    public Item removeItem(String name) {
+        return itemList.remove(name);
+    }
     public void addItem(Item item) {
         itemList.put(item.toString(), item);
     }
     public String getItemDescription(String item) {
         return itemList.get(item).getDescription();
+    }
+
+    public boolean hasItem(String name) {
+        return itemList.containsKey(name);
     }
 }

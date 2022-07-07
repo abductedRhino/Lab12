@@ -15,7 +15,8 @@ public enum Enum
     UNKNOWN("?"),
     JUMP("jump"),
     BACK("back"),
-    INSPECT("inspect");
+    INSPECT("inspect"),
+    TAKE("take");
     private String enumString;
 
     Enum(String enumString) {

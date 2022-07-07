@@ -182,33 +182,38 @@ public class Game
             case INSPECT:
                 result = inspect(command);
                 break;
+            case TAKE:
+                result = take(command);
+                break;
         }
-
-        /*
-        if (commandWord.equals("help")) {
-            result = printHelp();
-        }
-        else if (commandWord.equals("go")) {
-            result = goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
-            result = quit(command);
-        }
-        else if (commandWord.equals("look")){
-            result = look();
-        }
-        else if (commandWord.equals("eat")){
-            result = eat();
-        }
-        else if (commandWord == CommandWord.JUMP){
-            result = jump();
-        }
-        */
         return result ;
     }
 
+    private String take(Command command) {
+        if (!command.hasSecondWord()) {
+            return "take what?";
+        } else {
+            Item item = player1.getCurrentRoom().removeItem(command.getSecondWord());
+            if (item == null) {
+                return "no such thing in this room.";
+            } else if (!player1.canCarry(item)) {
+                return "it is too heavy. drop something.";
+            } else if (!item.canBePickedUp()) {
+                return "don't be ridiculous.";
+            } else {
+                player1.addItem(item);
+                return "you picked up " + command.getSecondWord();
+            }
+        }
+    }
     private String inspect(Command command) {
-        return command.hasSecondWord() ? player1.getCurrentRoom().getItemDescription(command.getSecondWord()) : "inspect what?";
+        if (!command.hasSecondWord()) {
+            return "inspect what?";
+        } else if (!player1.getCurrentRoom().hasItem(command.getSecondWord())) {
+            return "no such thing in this room.";
+        } else {
+            return player1.getCurrentRoom().getItemDescription(command.getSecondWord());
+        }
     }
 
 
