@@ -28,8 +28,8 @@ import java.util.Stack;
 public class Game
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room> previousRooms;
+    private Player player1;
+    private Room spawn;
 
     /**
      * Create the game and initialise its internal map.
@@ -38,7 +38,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        previousRooms = new Stack<>();
+        player1 = new Player(spawn, 20);
     }
 
     /**
@@ -66,16 +66,16 @@ public class Game
         pit.setExit("west", cave);
 
         //initialize items
-        Item knife = new Item("knife", 3,true);
-        Item leash = new Item("leash", 5,true);
-        Item water = new Item("water", 1,true);
+        Item knife = new Item("knife"," a rusty knive", 3,true);
+        Item leash = new Item("leash","a leash", 5,true);
+        Item water = new Item("water","greenish dropplets of smelly", 1,true);
         Item food = new Item("food",2,true);
         Item rock = new Item("rock", 1,true);
         Item slingshot = new Item ("slingshot", 4,true);
-        Item boots = new Item ("old worn out boots", 2,true);
-        Item light = new Item ("rusty flashlight", 2,true);
-        Item lighter = new Item ("a zippo lighter", 2,true);
-        Item map = new Item ("a map of the cave", 1,true);
+        Item boots = new Item ("boots","old worn out boots", 2,true);
+        Item light = new Item ("flashlight","rusty flashlight", 2,true);
+        Item lighter = new Item ("lighter","a zippo lighter", 2,true);
+        Item map = new Item ("map","a map of the cave", 1,true);
 
 
         //add items to specific rooms
@@ -95,10 +95,7 @@ public class Game
 
         pit.addItem(leash);
 
-
-
-
-        currentRoom = start;  // start game outside
+        this.spawn = start;
     }
 
     /**
@@ -146,7 +143,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player1.getCurrentRoom().getLongDescription());
 
     }
     /**
@@ -182,6 +179,9 @@ public class Game
             case BACK:
                 result = back();
                 break;
+            case INSPECT:
+                result = inspect(command);
+                break;
         }
 
         /*
@@ -205,6 +205,10 @@ public class Game
         }
         */
         return result ;
+    }
+
+    private String inspect(Command command) {
+        return command.hasSecondWord() ? player1.getCurrentRoom().getItemDescription(command.getSecondWord()) : "inspect what?";
     }
 
 
@@ -242,25 +246,24 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player1.getCurrentRoom().getExit(direction);
         String result = "";
         if (nextRoom == null) {
             result += "There is no door!";
         }
         else {
-            previousRooms.push(currentRoom);
-            currentRoom = nextRoom;
-            result = currentRoom.getLongDescription();
+            player1.moveTo(nextRoom);
+            result = player1.getCurrentRoom().getLongDescription();
         }
         return result + "\n";
     }
 
     private String back() {
-        if(previousRooms.empty()){
-            return "Nothing to go back to.";
+        if(player1.canGoBack()){
+            player1.goBack();
+            return player1.getCurrentRoom().getLongDescription()+"\n";
         } else {
-            currentRoom = previousRooms.pop();
-            return currentRoom.getLongDescription()+"\n";
+            return "Nothing to go back to.";
         }
     }
 
@@ -280,7 +283,7 @@ public class Game
     }
     private String look()
     {
-        return currentRoom.getLongDescription();
+        return player1.getCurrentRoom().getLongDescription();
     }
     private String eat(){
         return new String ("You have eaten now and are not hungry any more");
