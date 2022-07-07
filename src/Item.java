@@ -8,27 +8,24 @@
 public class Item
 {
     private int weight;
-    private String name;
+    private String description;
+    private boolean portable;
 
     /**
      * Constructor for objects of class item
      */
-    public Item(String name, int weight)
-    {
+    public Item(String description, int weight, boolean portable) {
         this.weight = weight;
-        this.name = name;
+        this.description = description;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     *
-     * @return    the sum of x and y
-     */
+    public boolean canBePickedUp() {
+        return portable;
+    }
     @Override
     public String toString()
     {   //"Coffee mug, 1kg"
-        return name + "(" + weight + " kg)";
+        return description + " (" + weight + " kg)";
 
     }
 }

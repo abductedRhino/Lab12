@@ -66,16 +66,16 @@ public class Game
         pit.setExit("west", cave);
 
         //initialize items
-        Item knife = new Item("knife", 3);
-        Item leash = new Item("leash", 5);
-        Item water = new Item("water", 1);
-        Item food = new Item("food",2);
-        Item rock = new Item("rock", 1);
-        Item slingshot = new Item ("slingshot", 4);
-        Item boots = new Item ("boots", 2);
-        Item light = new Item ("light", 2);
-        Item fire = new Item ("fire", 2);
-        Item map = new Item ("map", 1);
+        Item knife = new Item("knife", 3,true);
+        Item leash = new Item("leash", 5,true);
+        Item water = new Item("water", 1,true);
+        Item food = new Item("food",2,true);
+        Item rock = new Item("rock", 1,true);
+        Item slingshot = new Item ("slingshot", 4,true);
+        Item boots = new Item ("old worn out boots", 2,true);
+        Item light = new Item ("rusty flashlight", 2,true);
+        Item lighter = new Item ("a zippo lighter", 2,true);
+        Item map = new Item ("a map of the cave", 1,true);
 
 
         //add items to specific rooms
@@ -83,7 +83,7 @@ public class Game
         cave.addItem(food);
         cave.addItem(water);
 
-        enclosure.addItem(fire);
+        enclosure.addItem(lighter);
         enclosure.addItem(knife);
 
         den.addItem(slingshot);
@@ -160,7 +160,7 @@ public class Game
             return "I don't know what you mean...";
         }
         String result = null;
-        Enum anEnum = parser.getEnum(command.getCommandWord());
+        Enum anEnum = parser.getEnum(command.getFirstWord());
         switch(anEnum) {
             case HELP :
                 result = printHelp();

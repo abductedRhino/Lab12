@@ -18,7 +18,7 @@
  */
 
 public class Command {
-    private String commandWord;
+    private String firstWord;
     private String secondWord;
 
     /**
@@ -30,7 +30,7 @@ public class Command {
      */
     public Command(String firstWord, String secondWord)
     {
-        commandWord = firstWord;
+        this.firstWord = firstWord;
         this.secondWord = secondWord;
     }
 
@@ -39,9 +39,9 @@ public class Command {
      * command was not understood, the result is null.
      * @return The command word.
      */
-    public String getCommandWord()
+    public String getFirstWord()
     {
-        return commandWord;
+        return firstWord;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Command {
      */
     public boolean isUnknown()
     {
-        return (commandWord == null);
+        return (firstWord == null);
     }
 
     /**
