@@ -160,8 +160,8 @@ public class Game
             return "I don't know what you mean...";
         }
         String result = null;
-        CommandWord commandWord = parser.getEnum(command.getCommandWord());
-        switch(commandWord) {
+        Enum anEnum = parser.getEnum(command.getCommandWord());
+        switch(anEnum) {
             case HELP :
                 result = printHelp();
                 break;

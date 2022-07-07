@@ -15,21 +15,21 @@ import java.util.HashMap;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private HashMap<String, CommandWord> validCommands;
+    private HashMap<String, Enum> validCommands;
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords() {
         validCommands = new HashMap<>();
-        validCommands.put("go",CommandWord.GO);
-        validCommands.put("look",CommandWord.LOOK);
-        validCommands.put("eat",CommandWord.EAT);
-        validCommands.put("help",CommandWord.HELP);
+        validCommands.put("go", Enum.GO);
+        validCommands.put("look", Enum.LOOK);
+        validCommands.put("eat", Enum.EAT);
+        validCommands.put("help", Enum.HELP);
         //validCommands.put("?",CommandWord.UNKNOWN);
-        validCommands.put("quit",CommandWord.QUIT);
-        validCommands.put("jump",CommandWord.JUMP);
-        validCommands.put("back",CommandWord.BACK);
+        validCommands.put("quit", Enum.QUIT);
+        validCommands.put("jump", Enum.JUMP);
+        validCommands.put("back", Enum.BACK);
     }
 
     /**
@@ -41,7 +41,7 @@ public class CommandWords
     {
         return validCommands.containsKey(aString);
     }
-    public CommandWord getCommand(String word){
+    public Enum getCommand(String word){
         return validCommands.get(word);
     }
     @Override

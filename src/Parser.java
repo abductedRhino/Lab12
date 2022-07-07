@@ -42,7 +42,7 @@ public class Parser
         System.out.print("> ");     // print prompt
         return reader.nextLine();
     }
-    public CommandWord getEnum(String firstWord){
+    public Enum getEnum(String firstWord){
         return commands.getCommand(firstWord);
     }
     public Command getCommand(String inputLine)
