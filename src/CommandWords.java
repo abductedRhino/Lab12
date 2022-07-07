@@ -32,6 +32,7 @@ public class CommandWords
         validCommands.put("back", Enum.BACK);
         validCommands.put("inspect", Enum.INSPECT);
         validCommands.put("take",Enum.TAKE);
+        validCommands.put("drop", Enum.DROP);
     }
 
     /**

@@ -1,17 +1,17 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 public class Player {
     private Room currentRoom;
     private Stack<Room> previousRooms;
-    private ArrayList<Item> rucksack;
+    private HashMap<String,Item> rucksack;
     private int weightLimit;
 
     public Player(Room spawnPoint,int weightLimit) {
         currentRoom = spawnPoint;
         this.weightLimit = weightLimit;
         previousRooms = new Stack<>();
-        rucksack = new ArrayList<>();
+        rucksack = new HashMap<>();
 
 
     }
@@ -47,18 +47,22 @@ public class Player {
     }
 
     public void addItem(Item thing) {
-        rucksack.add(thing);
+        rucksack.put(thing.toString(), thing);
     }
 
     private int totalWeight() {
         int total = 0;
-        for (Item item :
-                rucksack) {
-            total += item.getWeight();
+        for (String key :
+                rucksack.keySet()) {
+            total += rucksack.get(key).getWeight();
         }
         return total;
     }
     public boolean canCarry(Item item) {
         return item.getWeight() <= (weightLimit - totalWeight());
+    }
+
+    public Item getItem(String name) {
+        return rucksack.remove(name);
     }
 }

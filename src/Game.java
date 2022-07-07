@@ -185,6 +185,9 @@ public class Game
             case TAKE:
                 result = take(command);
                 break;
+            case DROP:
+                result = drop(command);
+                break;
         }
         return result ;
     }
@@ -206,6 +209,20 @@ public class Game
             }
         }
     }
+    private String drop(Command command) {
+        if (!command.hasSecondWord()) {
+            return "drop what?";
+        } else {
+            Item item = player1.getItem(command.getSecondWord());
+            if (item == null) {
+                return "you can't drop what you don't have.";
+            } else {
+                player1.getCurrentRoom().addItem(item);
+                return "You have thrown out " + item;
+            }
+        }
+    }
+
     private String inspect(Command command) {
         if (!command.hasSecondWord()) {
             return "inspect what?";
@@ -271,7 +288,6 @@ public class Game
             return "Nothing to go back to.";
         }
     }
-
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -293,6 +309,7 @@ public class Game
     private String eat(){
         return new String ("You have eaten now and are not hungry any more");
     }
+
     private String jump(){
         return new String ("You jumped and almost broke your ankle...");
     }

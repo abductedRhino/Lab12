@@ -16,7 +16,8 @@ public enum Enum
     JUMP("jump"),
     BACK("back"),
     INSPECT("inspect"),
-    TAKE("take");
+    TAKE("take"),
+    DROP("drop");
     private String enumString;
 
     Enum(String enumString) {
