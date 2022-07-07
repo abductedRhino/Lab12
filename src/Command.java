@@ -17,8 +17,7 @@
  * @version 2016.02.29
  */
 
-public class Command
-{
+public class Command {
     private String commandWord;
     private String secondWord;
 
