@@ -21,7 +21,7 @@ public class CommandWords
      * Constructor - initialise the command words.
      */
     public CommandWords() {
-        validCommands = new HashMap<>();
+        /*validCommands = new HashMap<>();
         validCommands.put("go", Enum.GO);
         validCommands.put("look", Enum.LOOK);
         validCommands.put("eat", Enum.EAT);
@@ -33,8 +33,20 @@ public class CommandWords
         validCommands.put("inspect", Enum.INSPECT);
         validCommands.put("take",Enum.TAKE);
         validCommands.put("drop", Enum.DROP);
+        validCommands.put("item", Enum.ITEM);
+         */
+        validCommands = new HashMap<>();
+        fillEnums();
     }
 
+    private void fillEnums() {
+        for (Enum e :
+                Enum.values()) {
+            if (e != Enum.UNKNOWN) {
+                validCommands.put(e.toString(),e);
+            }
+        }
+    }
     /**
      * Check whether a given String is a valid command word.
      * @return true if a given string is a valid command,

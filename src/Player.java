@@ -65,4 +65,16 @@ public class Player {
     public Item getItem(String name) {
         return rucksack.remove(name);
     }
+    public String itemString() {
+        if (rucksack.isEmpty()) {
+            return "Your rucksack is empty.";
+        } else {
+            String ret = "You have: \n";
+            for (String key :
+                    rucksack.keySet()) {
+                ret += "   - " + rucksack.get(key)+ "\n";
+            }
+            return ret;
+        }
+    }
 }

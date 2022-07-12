@@ -12,12 +12,14 @@ public enum Enum
     HELP("help"),
     EAT("eat"),
     LOOK("look"),
-    UNKNOWN("?"),
     JUMP("jump"),
     BACK("back"),
     INSPECT("inspect"),
     TAKE("take"),
-    DROP("drop");
+    DROP("drop"),
+
+    ITEM("item"),
+    UNKNOWN("?");
     private String enumString;
 
     Enum(String enumString) {
@@ -26,6 +28,10 @@ public enum Enum
     @Override
     public String toString() {
         return enumString;
+    }
+
+    public Enum getEnum(String enumString) {
+        return Enum.valueOf(enumString);
     }
 
 }

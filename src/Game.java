@@ -188,8 +188,14 @@ public class Game
             case DROP:
                 result = drop(command);
                 break;
+            case ITEM:
+                result = item();
         }
         return result ;
+    }
+
+    private String item() {
+        return player1.itemString();
     }
 
     private String take(Command command) {
