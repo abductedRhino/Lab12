@@ -219,8 +219,11 @@ public class Game
         if (!command.hasSecondWord()) {
             return "drop what?";
         } else {
-            Item item = player1.getItem(command.getSecondWord());
-            if (item == null) {
+            String word = command.getSecondWord();
+            Item item = player1.getItem(word);
+            if (word.equals("all")) {
+                return player1.dropItems();
+            } else if (item == null) {
                 return "you can't drop what you don't have.";
             } else {
                 player1.getCurrentRoom().addItem(item);

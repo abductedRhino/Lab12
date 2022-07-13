@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Stack;
 
 public class Player {
@@ -74,6 +75,21 @@ public class Player {
                     rucksack.keySet()) {
                 ret += "   - " + rucksack.get(key)+ "\n";
             }
+            return ret;
+        }
+    }
+    public String dropItems() {
+        if (rucksack.isEmpty()) {
+            return "You don't have anything.";
+        } else {
+            String ret = "You have thrown away:\n";
+            for (String key :
+                    rucksack.keySet()) {
+                Item thing = rucksack.get(key);
+                ret += thing + "\n";
+                currentRoom.addItem(thing);
+            }
+            rucksack.clear();
             return ret;
         }
     }
