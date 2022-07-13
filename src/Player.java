@@ -71,10 +71,14 @@ public class Player {
             return "Your rucksack is empty.";
         } else {
             String ret = "You have: \n";
+            int totalweigth;
             for (String key :
                     rucksack.keySet()) {
-                ret += "   - " + rucksack.get(key)+ "\n";
+                Item thing = rucksack.get(key);
+                ret += "   - " + rucksack.get(key) + ", "+rucksack.get(key).getWeight()+"kg\n";
             }
+            ret += "total weight = "+ totalWeight() + "\n";
+            ret += "weight limit = " + weightLimit + "\n";
             return ret;
         }
     }
